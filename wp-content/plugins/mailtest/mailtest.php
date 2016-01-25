@@ -4,15 +4,15 @@
   */
   class emailer {
     static function friends($post_ID) {
+      $authURL = urlencode('https://api.instagram.com/oauth/authorize/?client_id=83e0a081339d4ae496ad1790e9b798e5&redirect_uri=http://localhost:8888/&response_type=code');
       $curl = curl_init();
       curl_setopt_array($curl,array(
-        CURLOPT_RETURNTRANSFER => 1,
-        CURLOPT_URL => 'https://api.instagram.com/v1/users/self/media/recent/?access_token=2270311824.83e0a08.5e753a28ab2145668e91fee86a482c0a',
-        CURLOPT_USERAGENT => 'sample'
+        CURLOPT_URL => 'https://api.instagram.com/oauth/access_token',
+        
       ));
       $resp = curl_exec($curl);
       curl_close($curl);
-      echo $resp;
+      echo $authURL;
     }
   }
   add_action('loop_start', array('emailer','friends'));
